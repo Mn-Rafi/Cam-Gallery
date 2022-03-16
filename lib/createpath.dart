@@ -37,7 +37,6 @@ Future<bool> createpath() async {
 
       if (folder != "Android") {
         newpath += "/" + folder;
-        print('Folder Created');
       } else {
         break;
       }

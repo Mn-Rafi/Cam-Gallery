@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cam_gallery/HiveCLass/gallery.dart';
 import 'package:cam_gallery/createpath.dart';
 import 'package:cam_gallery/display_image.dart';
@@ -15,23 +16,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-
+  Random random = Random();
+  int count= 1;
   XFile? _imageFile;
 
-  int count=1;
+  
 
   chooseImage(ImageSource source) async {
-    final pickedFile = await ImagePicker.platform.getImage(source: source);
+    final pickedFile = await ImagePicker().pickImage(source: source);
 
     setState(() {
       _imageFile = pickedFile;
       Hive.box<Gallery>('gallery').add(Gallery(
         imagePath: pickedFile!.path
       ));
-
+      count=random.nextInt(198127467);
     });
     File(_imageFile!.path).copy('${dir!.path}/CamImage0$count.jpeg');
       count++;
+      
   }
 
 
